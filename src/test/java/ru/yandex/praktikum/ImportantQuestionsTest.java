@@ -1,72 +1,49 @@
 package ru.yandex.praktikum;
-//Импортируем нужные библиотеки
+
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import java.util.Arrays;
+import java.util.Collection;
 
-//Создаем тестовый класс
+@RunWith(Parameterized.class)
+public class ImportantQuestionsTest extends BaseTest{
 
-public class ImportantQuestionsTest {
+    private final By panelLocator;
 
-    //Пишем метод, который будет искать текст вопросов, кликать и проверять наличие ответов в выпадающем списке
+    public ImportantQuestionsTest(By panelLocator) {
+        this.panelLocator = panelLocator;
+    }
+
+    @Parameterized.Parameters
+    public static Collection<Object[]> testDataOne() {
+        return Arrays.asList(new Object[][]{
+                {By.xpath("//*[@id='accordion__panel-0']")},
+                {By.xpath("//*[@id='accordion__panel-1']")},
+                {By.xpath("//*[@id='accordion__panel-2']")},
+                {By.xpath("//*[@id='accordion__panel-3']")},
+                {By.xpath("//*[@id='accordion__panel-4']")},
+                {By.xpath("//*[@id='accordion__panel-5']")},
+                {By.xpath("//*[@id='accordion__panel-6']")},
+                {By.xpath("//*[@id='accordion__panel-7']")}
+        });
+    }
+
     @Test
-    public void ImportantQuestionsTest() {
-        //Создаем объект драйвера, который будет управлять нашим браузером
-        WebDriver webDriver = new ChromeDriver();
-        //Открываем сайт с помощью драйвера
-        webDriver.get("https://qa-scooter.praktikum-services.ru/");
+    public void questionsTest() {
+        ImportantQuestionsPage importantQuestionsPage = new ImportantQuestionsPage(webDriver);
 
-        //Скроллим страницу вниз и кликаем по кнопке куки "Да все привыкли"
-        JavascriptExecutor jse = (JavascriptExecutor) webDriver;
-        jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-        webDriver.findElement(By.xpath(".//*[@id='rcc-confirm-button']")).click();
+        importantQuestionsPage.ClickHowMuchDoesItCost();
+        importantQuestionsPage.ClickWantSeveralScooters();
+        importantQuestionsPage.ClickHowToCalculateRentTime();
+        importantQuestionsPage.ClickCanOneMakeOrderForToday();
+        importantQuestionsPage.ClickCanOneProlongAnOrder();
+        importantQuestionsPage.ClickDoYouBringACharger();
+        importantQuestionsPage.ClickCanOneCancelAnOrder();
+        importantQuestionsPage.ClickIfILiveOutOfMKAD();
 
-        //Далее с помощью локаторов ищем нужные нам элементы выпадающего списка
-        //1 - Сколько это стоит? И как оплатить?
-        webDriver.findElement(By.xpath("//*[@id='accordion__heading-0']")).click();
-        Assert.assertTrue("Выпадающий ответ на вопрос",
-                !webDriver.findElements(By.xpath("//*[@id='accordion__panel-0']")).isEmpty());
-
-        //2 - Хочу сразу несколько самокатов! Так можно?
-        webDriver.findElement(By.xpath("//*[@id='accordion__heading-1']")).click();
-        Assert.assertTrue("Выпадающий ответ на вопрос",
-                !webDriver.findElements(By.xpath("//*[@id='accordion__panel-1']")).isEmpty());
-
-        //3 - Как рассчитывается время аренды?
-        webDriver.findElement(By.xpath("//*[@id='accordion__heading-2']")).click();
-        Assert.assertTrue("Выпадающий ответ на вопрос",
-                !webDriver.findElements(By.xpath("//*[@id='accordion__panel-2']")).isEmpty());
-
-        //4 - Можно ли заказать самокат прямо на сегодня?
-        webDriver.findElement(By.xpath("//*[@id='accordion__heading-3']")).click();
-        Assert.assertTrue("Выпадающий ответ на вопрос",
-                !webDriver.findElements(By.xpath("//*[@id='accordion__panel-3']")).isEmpty());
-
-        //5 - Можно ли продлить заказ или вернуть самокат раньше?
-        webDriver.findElement(By.xpath("//*[@id='accordion__heading-4']")).click();
-        Assert.assertTrue("Выпадающий ответ на вопрос",
-                !webDriver.findElements(By.xpath("//*[@id='accordion__panel-4']")).isEmpty());
-
-        //6 - Вы привозите зарядку вместе с самокатом?
-        webDriver.findElement(By.xpath("//*[@id='accordion__heading-5']")).click();
-        Assert.assertTrue("Выпадающий ответ на вопрос",
-                !webDriver.findElements(By.xpath("//*[@id='accordion__panel-5']")).isEmpty());
-
-        //7 - Можно ли отменить заказ?
-        webDriver.findElement(By.xpath("//*[@id='accordion__heading-6']")).click();
-        Assert.assertTrue("Выпадающий ответ на вопрос",
-                !webDriver.findElements(By.xpath("//*[@id='accordion__panel-6']")).isEmpty());
-
-        //8 - Я жизу за МКАДом, привезёте?
-        webDriver.findElement(By.xpath("//*[@id='accordion__heading-7']")).click();
-        Assert.assertTrue("Выпадающий ответ на вопрос",
-                !webDriver.findElements(By.xpath("//*[@id='accordion__panel-7']")).isEmpty());
-
-        //Закрываем браузер
-        webDriver.quit();
+        Assert.assertFalse("Выпадающий ответ на вопрос", webDriver.findElements(panelLocator).isEmpty());
     }
 }
-

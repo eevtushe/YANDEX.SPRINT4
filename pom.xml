@@ -39,6 +39,11 @@
             <artifactId>antlr</artifactId>
             <version>2.7.2</version>
         </dependency>
+        <dependency>
+            <groupId>pl.oakfusion</groupId>
+            <artifactId>chromedriver</artifactId>
+            <version>2.9</version>
+        </dependency>
 
     </dependencies>
 </project>
