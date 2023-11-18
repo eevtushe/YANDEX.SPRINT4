@@ -35,8 +35,8 @@ public class WhomScooterTest extends BaseTest{
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
-                {"Сергей", "Иванов", "Усова,3", "Бульвар Рокоссовского", "+79818410000", 16, "сутки", "черный жемчуг", "Очень жду свой заказ"},
-                {"Иван", "Петров", "Иванова,5", "Бульвар Рокоссовского", "+79818410022", 16, "сутки", "черный жемчуг", "Очень жду свой заказ"}
+                {"Сергей", "Иванов", "Усова,3", "Бульвар Рокоссовского", "+79818410000", 18, "сутки", "черный жемчуг", "Очень жду свой заказ"},
+                {"Иван", "Петров", "Иванова,5", "Бульвар Рокоссовского", "+79818410022", 18, "сутки", "черный жемчуг", "Жду самокат"}
         });
     }
     @Test
@@ -50,18 +50,21 @@ public class WhomScooterTest extends BaseTest{
         WhomScooterPage.insertOrderName(name);
         WhomScooterPage.insertOrderSurname(surname);
         WhomScooterPage.insertOrderAddress(address);
-        WhomScooterPage.clickStationField();
-        WhomScooterPage.insertStationName(station);
+        WhomScooterPage.clickStationField(station);
         WhomScooterPage.insertOrderPhone(phone);
         WhomScooterPage.clickNextButton();
 
         //Вызов методов страницы "Про аренду"
 
-        WhomScooterPage.clickOrderDate();
+        WhomScooterPage.clickOrderDate(date);
         WhomScooterPage.clickOrderPeriod();
         WhomScooterPage.clickOrderColor();
         WhomScooterPage.clickOrderComment(comment);
         WhomScooterPage.clickConfirmButton();
+        WhomScooterPage.assertOrderConfirmationWindowVisible();
+
+        //В Google Chrome кнопка подтверждения заказа "Да" не работает, и это баг!
+        //WhomScooterPage.clickConfirmationButton(); - если раскомментировать выполнение данного метода, автотест упадет
     }
 }
 

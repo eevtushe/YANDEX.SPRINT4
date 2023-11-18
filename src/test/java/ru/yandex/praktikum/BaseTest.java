@@ -25,5 +25,5 @@ public class BaseTest {
     @After
     public void closeBrowser() {
         webDriver.quit();
-    }
+   }
 }
