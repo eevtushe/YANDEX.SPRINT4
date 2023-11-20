@@ -40,7 +40,7 @@ public class WhomScooterTest extends BaseTest{
         });
     }
     @Test
-    public void OrderTest() {
+    public void orderTest() {
 
         WhomScooterPage WhomScooterPage = new WhomScooterPage(webDriver);
 

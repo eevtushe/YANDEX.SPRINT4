@@ -35,15 +35,20 @@ public class ImportantQuestionsTest extends BaseTest{
     public void questionsTest() {
         ImportantQuestionsPage importantQuestionsPage = new ImportantQuestionsPage(webDriver);
 
-        importantQuestionsPage.ClickHowMuchDoesItCost();
-        importantQuestionsPage.ClickWantSeveralScooters();
-        importantQuestionsPage.ClickHowToCalculateRentTime();
-        importantQuestionsPage.ClickCanOneMakeOrderForToday();
-        importantQuestionsPage.ClickCanOneProlongAnOrder();
-        importantQuestionsPage.ClickDoYouBringACharger();
-        importantQuestionsPage.ClickCanOneCancelAnOrder();
-        importantQuestionsPage.ClickIfILiveOutOfMKAD();
+        //Вызываем метод, который будет скроллить страницу вниз и кликать по кнопке "Cookies"
+        importantQuestionsPage.clickCookieButton();
 
+        //Вызов методов, которые открывают категорию "Вопросы/Ответы"
+        importantQuestionsPage.clickHowMuchDoesItCost();
+        importantQuestionsPage.clickWantSeveralScooters();
+        importantQuestionsPage.clickHowToCalculateRentTime();
+        importantQuestionsPage.clickCanOneMakeOrderForToday();
+        importantQuestionsPage.clickCanOneProlongAnOrder();
+        importantQuestionsPage.clickDoYouBringACharger();
+        importantQuestionsPage.clickCanOneCancelAnOrder();
+        importantQuestionsPage.clickIfILiveOutOfMKAD();
+
+        //Проверяем, что ответы на вопросы есть
         Assert.assertFalse("Выпадающий ответ на вопрос", webDriver.findElements(panelLocator).isEmpty());
     }
 }

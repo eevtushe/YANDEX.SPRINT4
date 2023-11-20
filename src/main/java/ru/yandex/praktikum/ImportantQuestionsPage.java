@@ -1,12 +1,18 @@
 package ru.yandex.praktikum;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 public class ImportantQuestionsPage {
-    private static final String URL = "https://qa-scooter.praktikum-services.ru/";
+    private final String URL = "https://qa-scooter.praktikum-services.ru/";
     private final WebDriver webDriver;
+    protected JavascriptExecutor jse;
 
+    //Локатор кнопки "Cookies"
+    private By cookieButton = By.xpath(".//*[@id='rcc-confirm-button']");
+
+    //Локаторы вопросов на главной странице
     private By howMuchDoesItCost = By.xpath("//*[@id='accordion__heading-0']");
     private By wantSeveralScooters = By.xpath("//*[@id='accordion__heading-1']");
     private By howToCalculateRentTime = By.xpath("//*[@id='accordion__heading-2']");
@@ -23,36 +29,41 @@ public class ImportantQuestionsPage {
     public void open() {
         webDriver.get(URL);
     }
+    public void clickCookieButton() {
+        jse = (JavascriptExecutor) webDriver;
+        jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        webDriver.findElement(cookieButton).click();
+    }
 
-    public void ClickHowMuchDoesItCost() {
+    public void clickHowMuchDoesItCost() {
         webDriver.findElement(howMuchDoesItCost).click();
     }
 
-    public void ClickWantSeveralScooters() {
+    public void clickWantSeveralScooters() {
         webDriver.findElement(wantSeveralScooters).click();
     }
 
-    public void ClickHowToCalculateRentTime() {
+    public void clickHowToCalculateRentTime() {
         webDriver.findElement(howToCalculateRentTime).click();
     }
 
-    public void ClickCanOneMakeOrderForToday() {
+    public void clickCanOneMakeOrderForToday() {
         webDriver.findElement(canOneMakeOrderForToday).click();
     }
 
-    public void ClickCanOneProlongAnOrder() {
+    public void clickCanOneProlongAnOrder() {
         webDriver.findElement(canOneProlongAnOrder).click();
     }
 
-    public void ClickDoYouBringACharger() {
+    public void clickDoYouBringACharger() {
         webDriver.findElement(doYouBringACharger).click();
     }
 
-    public void ClickCanOneCancelAnOrder() {
+    public void clickCanOneCancelAnOrder() {
         webDriver.findElement(canOneCancelAnOrder).click();
     }
 
-    public void ClickIfILiveOutOfMKAD() {
+    public void clickIfILiveOutOfMKAD() {
         webDriver.findElement(ifILiveOutOfMKAD).click();
     }
 }
