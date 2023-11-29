@@ -10,17 +10,26 @@ public class ImportantQuestionsPage {
     protected JavascriptExecutor jse;
 
     //Локатор кнопки "Cookies"
-    private By cookieButton = By.xpath(".//*[@id='rcc-confirm-button']");
+    private By cookieButton =
+            By.xpath(".//*[@id='rcc-confirm-button']");
 
     //Локаторы вопросов на главной странице
-    private By howMuchDoesItCost = By.xpath("//*[@id='accordion__heading-0']");
-    private By wantSeveralScooters = By.xpath("//*[@id='accordion__heading-1']");
-    private By howToCalculateRentTime = By.xpath("//*[@id='accordion__heading-2']");
-    private By canOneMakeOrderForToday = By.xpath("//*[@id='accordion__heading-3']");
-    private By canOneProlongAnOrder = By.xpath("//*[@id='accordion__heading-4']");
-    private By doYouBringACharger = By.xpath("//*[@id='accordion__heading-5']");
-    private By canOneCancelAnOrder = By.xpath("//*[@id='accordion__heading-6']");
-    private By ifILiveOutOfMKAD = By.xpath("//*[@id='accordion__heading-7']");
+    private By howMuchDoesItCost =
+            By.xpath("//div[text()='Сколько это стоит? И как оплатить?']");
+    private By wantSeveralScooters =
+            By.xpath("//div[text()='Хочу сразу несколько самокатов! Так можно?']");
+    private By howToCalculateRentTime =
+            By.xpath("//div[text()='Как рассчитывается время аренды?']");
+    private By canOneMakeOrderForToday =
+            By.xpath("//div[text()='Можно ли заказать самокат прямо на сегодня?']");
+    private By canOneProlongAnOrder =
+            By.xpath("//div[text()='Можно ли продлить заказ или вернуть самокат раньше?']");
+    private By doYouBringACharger =
+            By.xpath("//div[text()='Вы привозите зарядку вместе с самокатом?']");
+    private By canOneCancelAnOrder =
+            By.xpath("//div[text()='Можно ли отменить заказ?']");
+    private By ifILiveOutOfMKAD =
+            By.xpath("//div[text()='Я жизу за МКАДом, привезёте?']");
 
     public ImportantQuestionsPage(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -35,35 +44,11 @@ public class ImportantQuestionsPage {
         webDriver.findElement(cookieButton).click();
     }
 
-    public void clickHowMuchDoesItCost() {
-        webDriver.findElement(howMuchDoesItCost).click();
+    public void clickQuestion(By questionLocator) {
+        webDriver.findElement(questionLocator).click();
     }
-
-    public void clickWantSeveralScooters() {
-        webDriver.findElement(wantSeveralScooters).click();
-    }
-
-    public void clickHowToCalculateRentTime() {
-        webDriver.findElement(howToCalculateRentTime).click();
-    }
-
-    public void clickCanOneMakeOrderForToday() {
-        webDriver.findElement(canOneMakeOrderForToday).click();
-    }
-
-    public void clickCanOneProlongAnOrder() {
-        webDriver.findElement(canOneProlongAnOrder).click();
-    }
-
-    public void clickDoYouBringACharger() {
-        webDriver.findElement(doYouBringACharger).click();
-    }
-
-    public void clickCanOneCancelAnOrder() {
-        webDriver.findElement(canOneCancelAnOrder).click();
-    }
-
-    public void clickIfILiveOutOfMKAD() {
-        webDriver.findElement(ifILiveOutOfMKAD).click();
+    public boolean isAnswerDisplayed(By answerLocator) {
+        return !webDriver.findElements(answerLocator).isEmpty();
     }
 }
+

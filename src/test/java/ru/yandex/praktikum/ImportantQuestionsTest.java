@@ -9,46 +9,37 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @RunWith(Parameterized.class)
-public class ImportantQuestionsTest extends BaseTest{
+public class ImportantQuestionsTest extends BaseTest {
 
-    private final By panelLocator;
+    private final By questionLocator;
+    private final By answerLocator;
 
-    public ImportantQuestionsTest(By panelLocator) {
-        this.panelLocator = panelLocator;
+    public ImportantQuestionsTest(By questionLocator, By answerLocator) {
+        this.questionLocator = questionLocator;
+        this.answerLocator = answerLocator;
     }
 
+    //Положил в параметры сами локаторы, так как вызвать поля, созданные в ImportantQuestionsPage, я не могу.
     @Parameterized.Parameters
-    public static Collection<Object[]> testDataOne() {
+    public static Collection<Object[]> testData() {
         return Arrays.asList(new Object[][]{
-                {By.xpath("//*[@id='accordion__panel-0']")},
-                {By.xpath("//*[@id='accordion__panel-1']")},
-                {By.xpath("//*[@id='accordion__panel-2']")},
-                {By.xpath("//*[@id='accordion__panel-3']")},
-                {By.xpath("//*[@id='accordion__panel-4']")},
-                {By.xpath("//*[@id='accordion__panel-5']")},
-                {By.xpath("//*[@id='accordion__panel-6']")},
-                {By.xpath("//*[@id='accordion__panel-7']")}
+                {By.xpath("//div[text()='Сколько это стоит? И как оплатить?']"), By.xpath("//div[p[contains(text(),'Сутки — 400 рублей. Оплата курьеру — наличными или картой.')]]")},
+                {By.xpath("//div[text()='Хочу сразу несколько самокатов! Так можно?']"), By.xpath("//div[p[contains(text(),'Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим.')]]")},
+                {By.xpath("//div[text()='Как рассчитывается время аренды?']"), By.xpath("//div[p[contains(text(),'Допустим, вы оформляете заказ на 8 мая. Мы привозим самокат 8 мая в течение дня. Отсчёт времени аренды начинается с момента, когда вы оплатите заказ курьеру. Если мы привезли самокат 8 мая в 20:30, суточная аренда закончится 9 мая в 20:30.')]]")},
+                {By.xpath("//div[text()='Можно ли заказать самокат прямо на сегодня?']"), By.xpath("//div[p[contains(text(),'Только начиная с завтрашнего дня. Но скоро станем расторопнее.')]]")},
+                {By.xpath("//div[text()='Можно ли продлить заказ или вернуть самокат раньше?']"), By.xpath("//div[p[contains(text(),'Пока что нет! Но если что-то срочное — всегда можно позвонить в поддержку по красивому номеру 1010.')]]")},
+                {By.xpath("//div[text()='Вы привозите зарядку вместе с самокатом?']"), By.xpath("//div[p[contains(text(),'Самокат приезжает к вам с полной зарядкой. Этого хватает на восемь суток — даже если будете кататься без передышек и во сне. Зарядка не понадобится.')]]")},
+                {By.xpath("//div[text()='Можно ли отменить заказ?']"), By.xpath("//div[p[contains(text(),'Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.')]]")},
+                {By.xpath("//div[text()='Я жизу за МКАДом, привезёте?']"), By.xpath("//div[p[contains(text(),'Да, обязательно. Всем самокатов! И Москве, и Московской области.')]]")},
         });
     }
 
     @Test
     public void questionsTest() {
         ImportantQuestionsPage importantQuestionsPage = new ImportantQuestionsPage(webDriver);
-
-        //Вызываем метод, который будет скроллить страницу вниз и кликать по кнопке "Cookies"
         importantQuestionsPage.clickCookieButton();
 
-        //Вызов методов, которые открывают категорию "Вопросы/Ответы"
-        importantQuestionsPage.clickHowMuchDoesItCost();
-        importantQuestionsPage.clickWantSeveralScooters();
-        importantQuestionsPage.clickHowToCalculateRentTime();
-        importantQuestionsPage.clickCanOneMakeOrderForToday();
-        importantQuestionsPage.clickCanOneProlongAnOrder();
-        importantQuestionsPage.clickDoYouBringACharger();
-        importantQuestionsPage.clickCanOneCancelAnOrder();
-        importantQuestionsPage.clickIfILiveOutOfMKAD();
-
-        //Проверяем, что ответы на вопросы есть
-        Assert.assertFalse("Выпадающий ответ на вопрос", webDriver.findElements(panelLocator).isEmpty());
+            importantQuestionsPage.clickQuestion(questionLocator);
+            Assert.assertTrue("Текст с ответом не появился",importantQuestionsPage.isAnswerDisplayed(answerLocator));
+        }
     }
-}
