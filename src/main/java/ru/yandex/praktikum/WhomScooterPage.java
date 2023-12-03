@@ -14,24 +14,37 @@ public class WhomScooterPage {
         this.webDriver = webDriver;
     }
 
-    //Локаторы страницы "Для кого самокат"
-    private final By orderButton = By.xpath(".//button[@class='Button_Button__ra12g']");
-    private final By orderName = By.xpath(".//input[@placeholder='* Имя']");
-    private final By orderSurname = By.xpath(".//input[@placeholder='* Фамилия']");
-    private final By orderAddress = By.xpath(".//input[@placeholder='* Адрес: куда привезти заказ']");
-    private final By stationName = By.xpath(".//input[@placeholder='* Станция метро']");
-    private final By orderPhone = By.xpath(".//input[@placeholder='* Телефон: на него позвонит курьер']");
-    private final By nextButton = By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM']");
+    private final By orderButton = By.xpath(
+            ".//button[@class='Button_Button__ra12g']");
+    private final By orderName = By.xpath(
+            ".//input[@placeholder='* Имя']");
+    private final By orderSurname = By.xpath(
+            ".//input[@placeholder='* Фамилия']");
+    private final By orderAddress = By.xpath(
+            ".//input[@placeholder='* Адрес: куда привезти заказ']");
+    private final By stationName = By.xpath(
+            ".//input[@placeholder='* Станция метро']");
+    private final By orderPhone = By.xpath(
+            ".//input[@placeholder='* Телефон: на него позвонит курьер']");
+    private final By nextButton = By.xpath(
+            ".//button[@class='Button_Button__ra12g Button_Middle__1CSJM']");
 
-    //Локаторы страницы "Про Аренду"
-    private final By orderDate = By.xpath(".//input[@placeholder='* Когда привезти самокат']");
-    private final By orderPeriod = By.xpath(".//div[@class='Dropdown-control']");
-    private final By orderPeriod2 = By.xpath(".//div[@class='Dropdown-option' and text()='сутки']");
-    private final By orderColor = By.xpath(".//label[@for='black']");
-    private final By orderComment = By.xpath(".//input[@placeholder='Комментарий для курьера']");
-    private final By ConfirmButton = By.xpath("//button[@class='Button_Button__ra12g Button_Middle__1CSJM']");
-    private final By orderConfirmationWindow = By.xpath(".//div[@class='Order_ModalHeader__3FDaJ' and text()='Хотите оформить заказ?']");
-    private final By confirmationButton = By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM']");
+    private final By orderDate = By.xpath(
+            ".//input[@placeholder='* Когда привезти самокат']");
+    private final By orderPeriod = By.xpath(
+            ".//div[@class='Dropdown-control']");
+    private final By orderPeriod2 = By.xpath(
+            ".//div[@class='Dropdown-option' and text()='сутки']");
+    private final By orderColor = By.xpath(
+            ".//label[@for='black']");
+    private final By orderComment = By.xpath(
+            ".//input[@placeholder='Комментарий для курьера']");
+    private final By ConfirmButton = By.xpath(
+            "//button[@class='Button_Button__ra12g Button_Middle__1CSJM']");
+    private final By orderConfirmationWindow = By.xpath(
+            ".//div[@class='Order_ModalHeader__3FDaJ' and text()='Хотите оформить заказ?']");
+    private final By confirmationButton = By.xpath(
+            ".//button[@class='Button_Button__ra12g Button_Middle__1CSJM']");
 
     public void open() {
         webDriver.get(URL);
